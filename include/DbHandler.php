@@ -269,9 +269,9 @@ class DbHandler {
      * @param String $task Le texte de la tâche
      * @param String $status le statut de la tâche
      */
-    public function updateTask($user_id, $task_id, $task, $status) {
-        $stmt = $this->conn->prepare("UPDATE tasks t, user_tasks ut set t.task = ?, t.status = ? WHERE t.id = ? AND t.id = ut.task_id AND ut.user_id = ?");
-        $stmt->bind_param("siii", $task, $status, $task_id, $user_id);
+    public function updateTask($user_id, $task_id, $task) {
+        $stmt = $this->conn->prepare("UPDATE tasks t, user_tasks ut set t.task = ? WHERE t.id = ? AND t.id = ut.task_id AND ut.user_id = ?");
+        $stmt->bind_param("sii", $task, $task_id, $user_id);
         $stmt->execute();
         $num_affected_rows = $stmt->affected_rows;
         $stmt->close();

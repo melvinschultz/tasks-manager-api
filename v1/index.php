@@ -242,17 +242,17 @@ $app->post('/tasks', 'authenticate', function() use ($app) {
  */
 $app->put('/tasks/:id', 'authenticate', function($task_id) use($app) {
             // vérifier les paramètres requises
-            verifyRequiredParams(array('task', 'status'));
+            verifyRequiredParams(array('task'));
 
             global $user_id;
             $task = $app->request->put('task');
-            $status = $app->request->put('status');
 
             $db = new DbHandler();
             $response = array();
 
             // Mise à jour de la tâche
-            $result = $db->updateTask($user_id, $task_id, $task, $status);
+//            $result = $db->updateTask($user_id, $task_id, $task, $status);
+            $result = $db->updateTask($user_id, $task_id, $task);
             if ($result) {
                 // Tache mise à jour
                 $response["error"] = false;
